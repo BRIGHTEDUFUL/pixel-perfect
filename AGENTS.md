@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Portfolio content lives in src/data/portfolio.ts and sections in src/components/sections/*; themes are CSS vars switched via html[data-theme] so colors animate in one place.
