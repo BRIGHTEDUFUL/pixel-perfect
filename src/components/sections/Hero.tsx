@@ -112,7 +112,7 @@ export function Hero({ ready }: { ready: boolean }) {
             initial={{ opacity: 0, scale: 0.9, clipPath: "inset(100% 0 0 0)" }}
             animate={{ opacity: 1, scale: 1, clipPath: "inset(0% 0 0 0)" }}
             transition={{ duration: 1.1, ease, delay: 0.1 }}
-            style={fine ? { x: tx } : undefined}
+            style={fine ? { x: tx } : {}}
             className="absolute inset-x-0 bottom-[6%] top-[4%]"
           >
             <div className="notched absolute inset-0 bg-theme-gradient" />
@@ -121,7 +121,7 @@ export function Hero({ ready }: { ready: boolean }) {
             <div className="absolute bottom-6 right-5 font-mono text-[10px] tracking-widest text-paper/80">+ ACCRA, GH</div>
           </motion.div>
 
-          <motion.div style={fine ? { rotateX: rx, rotateY: ry } : undefined} className="absolute inset-0 z-10">
+          <motion.div style={fine ? { rotateX: rx, rotateY: ry } : {}} className="absolute inset-0 z-10">
             <motion.div initial={{ y: 120, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ type: "spring", stiffness: 70, damping: 12, delay: 0.5 }} className="h-full">
               <motion.div animate={{ y: [0, -14, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="relative h-full">
                 <AnimatePresence mode="sync">
