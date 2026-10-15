@@ -113,8 +113,9 @@ export function Hero({ ready }: { ready: boolean }) {
             animate={{ opacity: 1, scale: 1, clipPath: "inset(0% 0 0 0)" }}
             transition={{ duration: 1.1, ease, delay: 0.1 }}
             style={fine ? { x: tx } : undefined}
-            className="notched absolute inset-x-0 bottom-[6%] top-[4%] bg-theme-gradient"
+            className="absolute inset-x-0 bottom-[6%] top-[4%]"
           >
+            <div className="notched absolute inset-0 bg-theme-gradient" />
             <div className="absolute left-5 top-6 font-mono text-[10px] tracking-[0.3em] text-paper/80">001 // SEC-OPS</div>
             <div className="absolute bottom-6 left-5 font-display text-5xl font-bold text-paper/20 sm:text-7xl">2026</div>
             <div className="absolute bottom-6 right-5 font-mono text-[10px] tracking-widest text-paper/80">+ ACCRA, GH</div>
