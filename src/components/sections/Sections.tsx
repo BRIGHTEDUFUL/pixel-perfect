@@ -23,7 +23,7 @@ function Heading({ index, title }: { index: string; title: string }) {
   );
 }
 
-const wrap = "mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32";
+const wrap = "[content-visibility:auto] [contain-intrinsic-size:auto_800px] mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32";
 
 export function About() {
   return (
@@ -57,7 +57,7 @@ export function About() {
 export function Skills() {
   return (
     <section id="skills" className="overflow-hidden py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6"><Heading index="02" title="Skills" /></div>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6"><Heading index="05" title="Skills" /></div>
       <div className="space-y-4">
         {skillRows.map((row, i) => (
           <div key={i} className="flex overflow-hidden">
@@ -82,7 +82,7 @@ export function Skills() {
 export function Experience() {
   return (
     <section id="experience" className={wrap}>
-      <Heading index="03" title="Experience" />
+      <Heading index="02" title="Experience" />
       <div className="divide-y border-y">
         {experience.map((e) => (
           <motion.article {...reveal} key={e.org} className="grid gap-4 py-8 md:grid-cols-[200px_1fr_1fr]">
@@ -137,7 +137,7 @@ export function Projects() {
 export function Certifications() {
   return (
     <section id="certifications" className={wrap}>
-      <Heading index="05" title="Certifications" />
+      <Heading index="03" title="Certifications" />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {certifications.map((c, i) => (
           <motion.div {...reveal} transition={{ ...reveal.transition, delay: i * 0.05 }} key={c.name}

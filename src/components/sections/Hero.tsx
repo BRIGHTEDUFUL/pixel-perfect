@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowDownRight, ArrowRight, Download, Shield } from "lucide-react";
-import neon from "@/assets/mascot-neon.png";
-import aurora from "@/assets/mascot-aurora.png";
-import sunset from "@/assets/mascot-sunset.png";
+import neon from "@/assets/mascot-neon.webp";
+import aurora from "@/assets/mascot-aurora.webp";
+import sunset from "@/assets/mascot-sunset.webp";
 import { profile } from "@/data/portfolio";
 import { useTheme } from "@/hooks/useTheme";
 import { Magnetic, Scramble } from "@/components/fx/Effects";
@@ -131,6 +131,8 @@ export function Hero({ ready }: { ready: boolean }) {
                     alt="Bright Eduful's hooded mascot tying its boots"
                     width={1024}
                     height={1280}
+                    decoding="async"
+                    fetchPriority="high"
                     initial={{ opacity: 0, scale: 0.96 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}

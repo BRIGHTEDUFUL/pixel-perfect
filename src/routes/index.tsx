@@ -36,10 +36,10 @@ function Index() {
         <main>
           <Hero ready={ready} />
           <About />
-          <Skills />
           <Experience />
-          <Projects />
           <Certifications />
+          <Projects />
+          <Skills />
           <Contact />
         </main>
         <FloatingThemeSwitcher />
