@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowDownRight, ArrowRight, Download, Shield } from "lucide-react";
-import neon from "@/assets/mascot-neon.png";
-import aurora from "@/assets/mascot-aurora.png";
-import sunset from "@/assets/mascot-sunset.png";
+import neon from "@/assets/mascot-neon.webp";
+import aurora from "@/assets/mascot-aurora.webp";
+import sunset from "@/assets/mascot-sunset.webp";
 import { profile } from "@/data/portfolio";
 import { useTheme } from "@/hooks/useTheme";
 import { Magnetic, Scramble } from "@/components/fx/Effects";
