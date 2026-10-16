@@ -131,6 +131,8 @@ export function Hero({ ready }: { ready: boolean }) {
                     alt="Bright Eduful's hooded mascot tying its boots"
                     width={1024}
                     height={1280}
+                    decoding="async"
+                    fetchPriority="high"
                     initial={{ opacity: 0, scale: 0.96 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
