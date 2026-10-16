@@ -96,7 +96,7 @@ export function Scramble({ text, className, delay = 0 }: { text: string; classNa
     if (!el) return;
     let iv: ReturnType<typeof setInterval>;
     const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
+      if (!e?.isIntersecting) return;
       io.disconnect();
       setTimeout(() => {
         let i = 0;
