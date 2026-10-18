@@ -1,3 +1,6 @@
 - [x] Personalize the mascot from Bright's portrait in all three themes.
 - [x] Add standalone portfolio pages and shared navigation.
 - [x] Verify page navigation, downloads, themes, and mobile layout.
+- [ ] Balance mascot head proportions across themes.
+- [ ] Improve mobile layout and initial loading without redesigning.
+- [ ] Verify mobile pages, theme changes, and performance improvements.
