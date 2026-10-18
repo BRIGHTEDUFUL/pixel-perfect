@@ -19,7 +19,7 @@ function Heading({ index, title }: { index: string; title: string }) {
   const Tag = standalone ? "h1" : "h2";
   return (
     <div className="mb-12 flex items-end justify-between gap-6 border-b pb-6">
-      <Tag className="min-w-0 break-words font-display text-3xl font-bold uppercase leading-tight sm:text-5xl lg:text-6xl">
+      <Tag className={`min-w-0 font-display font-bold uppercase leading-tight sm:text-5xl lg:text-6xl ${title === "Certifications" ? "text-xl" : "text-3xl"}`}>
         <Scramble text={title} />
       </Tag>
       <span className="font-mono text-xs tracking-widest text-muted-foreground">/{index}</span>

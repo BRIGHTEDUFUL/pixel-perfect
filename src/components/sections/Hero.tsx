@@ -55,7 +55,7 @@ export function Hero({ ready }: { ready: boolean }) {
   if (!ready) return <section id="home" className="min-h-svh" />;
 
   return (
-    <section id="home" className="relative min-h-svh overflow-hidden px-4 pb-16 pt-28 sm:px-6 lg:pt-32">
+    <section id="home" className="relative overflow-hidden px-4 pb-24 pt-28 sm:px-6 lg:pt-32">
       {/* vertical labels */}
       <div className="absolute left-3 top-1/2 hidden -translate-y-1/2 flex-col items-center gap-8 font-mono text-[10px] tracking-[0.3em] text-muted-foreground md:flex">
         <span className="vertical-label">S/N 48-150BF</span>
