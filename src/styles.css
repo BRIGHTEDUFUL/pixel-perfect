@@ -147,3 +147,8 @@
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
 @media (hover: none) { .cursor-ui { display: none !important; } }
+
+.portfolio-page section { content-visibility: visible; padding-top: 2rem; padding-bottom: 3rem; }
+.portfolio-page #contact > div { border-radius: 0; }
+.portfolio-page #contact { margin-top: 1rem; }
+.portfolio-page h1 { overflow-wrap: anywhere; }

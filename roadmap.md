@@ -1,0 +1,3 @@
+- [x] Personalize the mascot from Bright's portrait in all three themes.
+- [x] Add standalone portfolio pages and shared navigation.
+- [x] Verify page navigation, downloads, themes, and mobile layout.

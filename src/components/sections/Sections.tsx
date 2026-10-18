@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { StandalonePage } from "@/components/PortfolioPage";
 import { ArrowUpRight, Award, Download, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { profile } from "@/data/portfolio";
 import { about, certifications, education, experience, organizations, projects, skillRows } from "@/data/content";
@@ -13,11 +15,13 @@ const reveal = {
 };
 
 function Heading({ index, title }: { index: string; title: string }) {
+  const standalone = useContext(StandalonePage);
+  const Tag = standalone ? "h1" : "h2";
   return (
     <div className="mb-12 flex items-end justify-between gap-6 border-b pb-6">
-      <h2 className="font-display text-[clamp(2rem,7vw,4.5rem)] font-bold uppercase leading-none tracking-tight">
+      <Tag className={`min-w-0 font-display font-bold uppercase leading-tight sm:text-5xl lg:text-6xl ${title === "Certifications" ? "text-xl" : "text-3xl"}`}>
         <Scramble text={title} />
-      </h2>
+      </Tag>
       <span className="font-mono text-xs tracking-widest text-muted-foreground">/{index}</span>
     </div>
   );
@@ -55,6 +59,18 @@ export function About() {
 }
 
 export function Skills() {
+  const standalone = useContext(StandalonePage);
+  if (standalone) return (
+    <section id="skills" className={wrap}>
+      <Heading index="05" title="Skills" />
+      <div className="divide-y border-y">
+        {skillRows.map((row, i) => <div key={i} className="grid gap-6 py-8 md:grid-cols-[220px_1fr]">
+          <h2 className="font-mono text-sm text-muted-foreground">{["Security operations", "Tools & programming", "Frameworks & cloud"][i]}</h2>
+          <ul className="flex flex-wrap gap-3">{row.map(skill => <li key={skill} className="rounded-lg border bg-card px-4 py-3 font-medium">{skill}</li>)}</ul>
+        </div>)}
+      </div>
+    </section>
+  );
   return (
     <section id="skills" className="overflow-hidden py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6"><Heading index="05" title="Skills" /></div>
@@ -158,6 +174,8 @@ export function Certifications() {
 }
 
 export function Contact() {
+  const standalone = useContext(StandalonePage);
+  const Tag = standalone ? "h1" : "h2";
   const items = [
     { icon: Mail, label: profile.email, href: `mailto:${profile.email}` },
     { icon: Phone, label: profile.phone, href: `tel:${profile.phone}` },
@@ -168,9 +186,9 @@ export function Contact() {
     <section id="contact" className="px-3 pb-6 sm:px-6">
       <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-deep px-6 py-20 text-paper sm:px-12">
         <p className="font-mono text-xs tracking-widest text-signal">/06 — CONTACT</p>
-        <h2 className="mt-6 font-display text-[clamp(2.4rem,9vw,6rem)] font-bold uppercase leading-[0.95] tracking-tight">
+        <Tag className="mt-6 font-display text-3xl font-bold uppercase leading-tight sm:text-5xl lg:text-7xl">
           Let's secure<br /><span className="text-signal">something.</span>
-        </h2>
+        </Tag>
         <div className="mt-10 flex flex-wrap gap-3">
           <Magnetic>
             <a href={`mailto:${profile.email}`} className="inline-flex min-h-12 items-center gap-2 rounded-full bg-signal px-6 font-medium text-ink">
