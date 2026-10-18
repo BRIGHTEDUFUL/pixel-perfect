@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Portfolio content lives in src/data/portfolio.ts and sections in src/components/sections/*; themes are CSS vars switched via html[data-theme] so colors animate in one place.
+- Shared navigation, effects and ThemeProvider live around Outlet in the root route so page navigation preserves the active theme; leaf pages reuse section content with PortfolioPage for standalone headings and next-page navigation.

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowDownRight, ArrowRight, Download, Shield } from "lucide-react";
-import neon from "@/assets/mascot-neon.webp";
-import aurora from "@/assets/mascot-aurora.webp";
-import sunset from "@/assets/mascot-sunset.webp";
+import neon from "@/assets/bright-mascot-neon.webp";
+import aurora from "@/assets/bright-mascot-aurora.webp";
+import sunset from "@/assets/bright-mascot-sunset.webp";
 import { profile } from "@/data/portfolio";
 import { useTheme } from "@/hooks/useTheme";
 import { Magnetic, Scramble } from "@/components/fx/Effects";
@@ -55,12 +56,6 @@ export function Hero({ ready }: { ready: boolean }) {
 
   return (
     <section id="home" className="relative min-h-svh overflow-hidden px-4 pb-16 pt-28 sm:px-6 lg:pt-32">
-      {/* blobs */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="animate-blob absolute -left-20 top-20 h-72 w-72 bg-theme-3 opacity-25 blur-3xl sm:h-[28rem] sm:w-[28rem]" />
-        <div className="animate-blob absolute -right-20 bottom-0 hidden h-[26rem] w-[26rem] bg-theme-2 opacity-20 blur-3xl [animation-delay:-8s] sm:block" />
-      </div>
-
       {/* vertical labels */}
       <div className="absolute left-3 top-1/2 hidden -translate-y-1/2 flex-col items-center gap-8 font-mono text-[10px] tracking-[0.3em] text-muted-foreground md:flex">
         <span className="vertical-label">S/N 48-150BF</span>
@@ -94,9 +89,9 @@ export function Hero({ ready }: { ready: boolean }) {
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.15 }} className="mt-8 flex flex-wrap items-center gap-3">
             <Magnetic>
-              <a href="#projects" className="group inline-flex min-h-12 items-center gap-2 rounded-full bg-ink px-6 font-medium text-paper">
+              <Link to="/projects" className="group inline-flex min-h-12 items-center gap-2 rounded-full bg-ink px-6 font-medium text-paper">
                 View my work <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </a>
+              </Link>
             </Magnetic>
             <Magnetic>
               <a href={profile.cv} download className="inline-flex min-h-12 items-center gap-2 rounded-full border border-ink/30 px-6 font-medium transition-colors hover:bg-ink hover:text-paper">
@@ -128,7 +123,7 @@ export function Hero({ ready }: { ready: boolean }) {
                   <motion.img
                     key={theme}
                     src={mascots[theme]}
-                    alt="Bright Eduful's hooded mascot tying its boots"
+                    alt="Personalized 3D mascot of Bright Eduful tying his boots"
                     width={1024}
                     height={1280}
                     decoding="async"

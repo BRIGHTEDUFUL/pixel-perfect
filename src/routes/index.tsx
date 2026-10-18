@@ -1,12 +1,8 @@
 import { useCallback, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ThemeProvider } from "@/hooks/useTheme";
 import { Preloader } from "@/components/Preloader";
-import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/sections/Hero";
-import { FloatingThemeSwitcher } from "@/components/ThemeSwitcher";
 import { About, Certifications, Contact, Experience, Projects, Skills } from "@/components/sections/Sections";
-import { Cursor, ScrollProgress, SmoothScroll } from "@/components/fx/Effects";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,13 +22,8 @@ function Index() {
   const [ready, setReady] = useState(false);
   const done = useCallback(() => setReady(true), []);
   return (
-    <ThemeProvider>
-      <div className="grain">
+    <>
         <Preloader onDone={done} />
-        <SmoothScroll />
-        <ScrollProgress />
-        <Cursor />
-        <Navbar />
         <main>
           <Hero ready={ready} />
           <About />
@@ -42,8 +33,6 @@ function Index() {
           <Skills />
           <Contact />
         </main>
-        <FloatingThemeSwitcher />
-      </div>
-    </ThemeProvider>
+    </>
   );
 }
