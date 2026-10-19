@@ -1,7 +1,8 @@
 import { useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navLinks, profile } from "@/data/portfolio";
 import { Magnetic } from "@/components/fx/Effects";
@@ -9,9 +10,9 @@ import { Magnetic } from "@/components/fx/Effects";
 export function Navbar() {
   const [open, setOpen] = useState(false);
   return (
-    <>
-      <header className="fixed inset-x-0 top-3 z-[80] px-3 sm:top-4 sm:px-6">
-        <nav className="glass mx-auto flex max-w-7xl items-center justify-between rounded-full border px-4 py-2 sm:px-6">
+    <Dialog.Root open={open} onOpenChange={setOpen}>
+      <header className="fixed inset-x-0 top-[max(0.75rem,env(safe-area-inset-top))] z-[80] px-3 sm:top-4 sm:px-6">
+        <nav className="glass mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-full border px-4 py-2 sm:px-6 lg:flex lg:justify-between">
           <Link to="/" aria-label="Bright Eduful home" className="font-display text-xl font-bold tracking-tight">
             BE<span className="text-theme-2">.</span>
           </Link>
@@ -30,43 +31,47 @@ export function Navbar() {
                 Hire me
               </a>
             </Magnetic>
-            <Button size="icon" aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(true)} className="h-11 w-11 rounded-full lg:hidden">
-              <Menu size={18} />
-            </Button>
+            <Dialog.Trigger asChild>
+              <Button size="icon" aria-label="Open menu" className="h-11 w-11 shrink-0 rounded-full lg:hidden">
+                <Menu size={18} />
+              </Button>
+            </Dialog.Trigger>
           </div>
         </nav>
       </header>
 
-      <AnimatePresence>
-        {open && (
+      <Dialog.Portal>
+        <Dialog.Content asChild aria-describedby={undefined}>
           <motion.div
-            role="dialog" aria-modal="true" aria-label="Navigation menu"
-            className="fixed inset-0 z-[150] flex flex-col overflow-y-auto bg-deep p-5 text-paper sm:p-6"
+            className="fixed inset-0 z-[150] flex flex-col overflow-y-auto overscroll-contain bg-deep px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-[max(1.25rem,env(safe-area-inset-top))] text-paper sm:px-6"
             initial={{ clipPath: "circle(0% at 100% 0%)" }}
             animate={{ clipPath: "circle(150% at 100% 0%)" }}
             exit={{ clipPath: "circle(0% at 100% 0%)" }}
-            transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+            transition={{ duration: 0.35, ease: [0.76, 0, 0.24, 1] }}
           >
-            <div className="flex items-center justify-between">
+            <Dialog.Title className="sr-only">Navigation menu</Dialog.Title>
+            <div className="grid shrink-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
               <span className="font-display text-xl font-bold">BE<span className="text-signal">.</span></span>
-              <Button size="icon" variant="secondary" aria-label="Close menu" onClick={() => setOpen(false)} className="h-11 w-11 rounded-full">
-                <X size={18} />
-              </Button>
+              <Dialog.Close asChild>
+                <Button size="icon" variant="secondary" aria-label="Close menu" className="h-11 w-11 rounded-full">
+                  <X size={18} />
+                </Button>
+              </Dialog.Close>
             </div>
             <ul className="my-6 flex flex-1 flex-col gap-2 sm:my-12">
               {navLinks.map((l, i) => (
                 <motion.li key={l.href} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.25 + i * 0.06 }}>
-                  <Link to={l.href} onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-3 break-words font-display text-lg font-bold uppercase leading-tight sm:gap-4 sm:text-4xl">
-                    <span className="font-mono text-xs text-signal">0{i + 1}</span>
-                    {l.label}
+                  <Link to={l.href} onClick={() => setOpen(false)} className="grid min-h-12 grid-cols-[auto_minmax(0,1fr)] items-center gap-3 font-display text-lg font-bold uppercase leading-tight sm:gap-4 sm:text-3xl">
+                    <span className="shrink-0 font-mono text-xs text-signal">0{i + 1}</span>
+                    <span className="min-w-0 break-words">{l.label}</span>
                   </Link>
                 </motion.li>
               ))}
             </ul>
-            <p className="font-mono text-xs tracking-widest text-paper/60">{profile.email}</p>
+            <p className="shrink-0 break-all font-mono text-xs tracking-widest text-paper/60">{profile.email}</p>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }
