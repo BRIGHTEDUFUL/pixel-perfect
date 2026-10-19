@@ -45,7 +45,7 @@ export function Hero({ ready }: { ready: boolean }) {
   const [fine, setFine] = useState(false);
 
   useEffect(() => {
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches) return;
     setFine(true);
     const onMove = (e: MouseEvent) => { mx.set(e.clientX / window.innerWidth - 0.5); my.set(e.clientY / window.innerHeight - 0.5); };
     window.addEventListener("mousemove", onMove);
@@ -55,7 +55,7 @@ export function Hero({ ready }: { ready: boolean }) {
   if (!ready) return <section id="home" className="min-h-svh" />;
 
   return (
-    <section id="home" className="relative overflow-hidden px-4 pb-24 pt-28 sm:px-6 lg:pt-32">
+    <section id="home" className="relative overflow-hidden px-4 pb-16 pt-24 sm:px-6 sm:pb-24 lg:pt-32">
       {/* vertical labels */}
       <div className="absolute left-3 top-1/2 hidden -translate-y-1/2 flex-col items-center gap-8 font-mono text-[10px] tracking-[0.3em] text-muted-foreground 2xl:flex">
         <span className="vertical-label">S/N 48-150BF</span>
@@ -64,7 +64,7 @@ export function Hero({ ready }: { ready: boolean }) {
 
       <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[1.1fr_1fr]">
         {/* Copy */}
-        <div className="relative z-20 order-2 min-w-0 lg:order-1">
+        <div className="relative z-20 order-1 min-w-0">
           <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
             <span className="mr-2 inline-block h-2 w-2 rounded-full bg-signal align-middle" />
             <Scramble text="Hi, I'm Bright Eduful" />
@@ -83,11 +83,11 @@ export function Hero({ ready }: { ready: boolean }) {
             </motion.span>
           </h1>
 
-          <motion.p initial={{ opacity: 0, filter: "blur(8px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ delay: 1, duration: 0.8 }} className="mt-12 max-w-md text-base text-muted-foreground sm:text-lg">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35, duration: 0.4 }} className="mt-10 max-w-md text-base text-muted-foreground sm:mt-12 sm:text-lg">
             {profile.tagline.join(" • ")}
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.15 }} className="mt-8 flex flex-wrap items-center gap-3">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }} className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
             <Magnetic>
               <Link to="/projects" className="group inline-flex min-h-12 items-center gap-2 rounded-full bg-ink px-6 font-medium text-paper">
                 View my work <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -102,7 +102,7 @@ export function Hero({ ready }: { ready: boolean }) {
         </div>
 
         {/* Visual */}
-        <div className="relative order-1 mx-auto aspect-[4/5] w-full max-w-[26rem] lg:order-2 lg:max-w-[32rem]" style={{ perspective: 1000 }}>
+        <div className="relative order-2 mx-auto aspect-[4/5] w-full max-w-[16rem] sm:max-w-[26rem] lg:max-w-[32rem]" style={{ perspective: 1000 }}>
           <motion.div
             initial={{ opacity: 0, scale: 0.9, clipPath: "inset(100% 0 0 0)" }}
             animate={{ opacity: 1, scale: 1, clipPath: "inset(0% 0 0 0)" }}
@@ -118,14 +118,14 @@ export function Hero({ ready }: { ready: boolean }) {
 
           <motion.div style={fine ? { rotateX: rx, rotateY: ry } : {}} className="absolute inset-0 z-10">
             <motion.div initial={{ y: 120, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ type: "spring", stiffness: 70, damping: 12, delay: 0.5 }} className="h-full">
-              <motion.div animate={{ y: [0, -14, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="relative h-full">
+              <motion.div animate={{ y: fine ? [0, -14, 0] : 0 }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="relative h-full">
                 <AnimatePresence mode="sync">
                   <motion.img
                     key={theme}
                     src={mascots[theme]}
                     alt="Personalized 3D mascot of Bright Eduful tying his boots"
-                    width={1024}
-                    height={1280}
+                    width={720}
+                    height={894}
                     decoding="async"
                     fetchPriority="high"
                     initial={{ opacity: 0, scale: 0.96 }}
@@ -138,7 +138,7 @@ export function Hero({ ready }: { ready: boolean }) {
               </motion.div>
             </motion.div>
           </motion.div>
-          <motion.div animate={{ scaleX: [1, 0.82, 1], opacity: [0.35, 0.2, 0.35] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-[3%] left-1/2 h-6 w-2/3 -translate-x-1/2 rounded-[50%] bg-ink blur-xl" />
+          <motion.div animate={{ scaleX: fine ? [1, 0.82, 1] : 1, opacity: fine ? [0.35, 0.2, 0.35] : 0.25 }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-[3%] left-1/2 h-6 w-2/3 -translate-x-1/2 rounded-[50%] bg-ink blur-xl" />
 
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1.2, type: "spring" }} className="absolute -left-2 top-[8%] z-20 sm:-left-8">
             <RotatingBadge />

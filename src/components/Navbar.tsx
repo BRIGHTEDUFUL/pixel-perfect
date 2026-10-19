@@ -40,7 +40,8 @@ export function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-[150] flex flex-col bg-deep p-6 text-paper"
+            role="dialog" aria-modal="true" aria-label="Navigation menu"
+            className="fixed inset-0 z-[150] flex flex-col overflow-y-auto bg-deep p-5 text-paper sm:p-6"
             initial={{ clipPath: "circle(0% at 100% 0%)" }}
             animate={{ clipPath: "circle(150% at 100% 0%)" }}
             exit={{ clipPath: "circle(0% at 100% 0%)" }}
@@ -52,10 +53,10 @@ export function Navbar() {
                 <X size={18} />
               </Button>
             </div>
-            <ul className="mt-12 flex flex-1 flex-col gap-2">
+            <ul className="my-6 flex flex-1 flex-col gap-2 sm:my-12">
               {navLinks.map((l, i) => (
                 <motion.li key={l.href} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.25 + i * 0.06 }}>
-                  <Link to={l.href} onClick={() => setOpen(false)} className="flex items-baseline gap-4 font-display text-2xl font-bold uppercase leading-tight sm:text-4xl">
+                  <Link to={l.href} onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-3 break-words font-display text-lg font-bold uppercase leading-tight sm:gap-4 sm:text-4xl">
                     <span className="font-mono text-xs text-signal">0{i + 1}</span>
                     {l.label}
                   </Link>

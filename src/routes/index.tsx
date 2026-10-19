@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState(true);
   const done = useCallback(() => setReady(true), []);
   return (
     <>

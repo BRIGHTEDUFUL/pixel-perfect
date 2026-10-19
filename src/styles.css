@@ -122,7 +122,11 @@
   writing-mode: vertical-rl;
   transform: rotate(180deg);
 }
-@utility text-headline { font-size: clamp(2.4rem, 11.5vw, 6.4rem); line-height: 0.92; letter-spacing: -0.03em; }
+@utility text-headline { font-size: 2.25rem; line-height: 0.92; letter-spacing: 0; }
+@media (min-width: 380px) { .text-headline { font-size: 2.75rem; } }
+@media (min-width: 640px) { .text-headline { font-size: 4.5rem; } }
+@media (min-width: 1024px) { .text-headline { font-size: 4rem; } }
+@media (min-width: 1280px) { .text-headline { font-size: 5rem; } }
 @utility grain {
   &::after {
     content: "";
@@ -144,7 +148,15 @@
 @utility animate-blob { animation: blob 16s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+@keyframes skill-scroll { to { transform: translateX(-50%); } }
+.skill-marquee { animation: skill-scroll 36s linear infinite; }
+.skill-marquee-reverse { animation-direction: reverse; }
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .skill-marquee, .animate-spin-slow { animation: none; }
+  #skills > div.space-y-4 > div { overflow-x: auto; }
+  .grain::after { display: none; }
 }
 @media (hover: none) { .cursor-ui { display: none !important; } }
 
