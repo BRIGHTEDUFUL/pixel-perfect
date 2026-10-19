@@ -18,8 +18,8 @@ function Heading({ index, title }: { index: string; title: string }) {
   const standalone = useContext(StandalonePage);
   const Tag = standalone ? "h1" : "h2";
   return (
-    <div className="mb-8 flex items-end justify-between gap-2 border-b pb-6 sm:mb-12 sm:gap-6">
-      <Tag className={`min-w-0 break-words font-display font-bold uppercase leading-tight sm:text-5xl lg:text-6xl ${title === "Certifications" ? "text-lg" : "text-2xl"}`}>
+    <div className="mb-8 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-3 border-b pb-5 sm:mb-12 sm:gap-6">
+      <Tag className={`min-w-0 break-words font-display font-bold uppercase leading-tight sm:text-3xl md:text-4xl lg:text-6xl ${title === "Certifications" ? "text-lg min-[380px]:text-xl" : "text-2xl"}`}>
         <Scramble text={title} />
       </Tag>
       <span className="shrink-0 font-mono text-xs tracking-widest text-muted-foreground">/{index}</span>
@@ -27,7 +27,7 @@ function Heading({ index, title }: { index: string; title: string }) {
   );
 }
 
-const wrap = "[content-visibility:auto] [contain-intrinsic-size:auto_800px] mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-32";
+const wrap = "[content-visibility:auto] [contain-intrinsic-size:auto_800px] mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-24 lg:py-32";
 
 export function About() {
   return (
@@ -72,16 +72,16 @@ export function Skills() {
     </section>
   );
   return (
-    <section id="skills" className="overflow-hidden py-24 sm:py-32">
+    <section id="skills" className="overflow-hidden py-12 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6"><Heading index="05" title="Skills" /></div>
       <div className="space-y-4">
         {skillRows.map((row, i) => (
-          <div key={i} className="flex overflow-hidden">
+          <div key={i} className="skill-row flex overflow-hidden">
             <motion.div
               className={`skill-marquee flex shrink-0 gap-4 pr-4 ${i % 2 ? "skill-marquee-reverse" : ""}`}
             >
               {[...row, ...row].map((s, k) => (
-                <span key={k} className={`whitespace-nowrap rounded-full border px-6 py-3 font-display text-lg font-bold uppercase sm:text-2xl ${k % 3 === 1 ? "bg-ink text-paper" : k % 3 === 2 ? "bg-signal text-ink border-transparent" : ""}`}>
+                <span key={k} aria-hidden={k >= row.length ? true : undefined} className={`skill-chip ${k >= row.length ? "skill-copy" : ""} whitespace-nowrap rounded-full border px-6 py-3 font-display text-lg font-bold uppercase sm:text-2xl ${k % 3 === 1 ? "bg-ink text-paper" : k % 3 === 2 ? "bg-signal text-ink border-transparent" : ""}`}>
                   {s}
                 </span>
               ))}
@@ -102,7 +102,7 @@ export function Experience() {
           <motion.article {...reveal} key={e.org} className="grid gap-4 py-8 md:grid-cols-[200px_1fr_1fr]">
             <span className="font-mono text-xs tracking-widest text-muted-foreground">{e.period}</span>
             <div>
-              <h3 className="font-display text-2xl font-bold">{e.org}</h3>
+              <h3 className="break-words font-display text-xl font-bold sm:text-2xl">{e.org}</h3>
               <p className="mt-1 text-muted-foreground">{e.role}</p>
             </div>
             <ul className="space-y-2">
@@ -121,21 +121,21 @@ export function Projects() {
   return (
     <section id="projects" className={wrap}>
       <Heading index="04" title="Projects" />
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {projects.map((p, i) => (
           <motion.article
             {...reveal}
             transition={{ ...reveal.transition, delay: i * 0.1 }}
             key={p.title}
             data-cursor="view"
-            className="group flex min-h-80 flex-col justify-between rounded-3xl bg-theme-gradient p-6 text-paper shadow-float transition-transform duration-500 hover:-translate-y-2"
+            className="group flex min-w-0 min-h-64 flex-col justify-between gap-8 rounded-3xl bg-theme-gradient p-5 text-paper shadow-float transition-transform duration-500 hover:-translate-y-2 sm:min-h-80 sm:p-6"
           >
             <div className="flex items-start justify-between">
               <span className="font-mono text-xs tracking-widest">0{i + 1}</span>
               <ArrowUpRight className="transition-transform group-hover:rotate-45" />
             </div>
             <div>
-              <h3 className="font-display text-2xl font-bold uppercase leading-tight">{p.title}</h3>
+              <h3 className="break-words font-display text-xl font-bold uppercase leading-tight sm:text-2xl">{p.title}</h3>
               <p className="mt-3 text-sm text-paper/80">{p.text}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {p.tags.map((t) => <span key={t} className="rounded-full bg-paper/15 px-3 py-1 font-mono text-[11px]">{t}</span>)}
@@ -155,9 +155,9 @@ export function Certifications() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {certifications.map((c, i) => (
           <motion.div {...reveal} transition={{ ...reveal.transition, delay: i * 0.05 }} key={c.name}
-            className={`flex items-start gap-4 rounded-3xl border p-6 ${i === 0 ? "bg-ink text-paper" : "bg-card"}`}>
+            className={`grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-start gap-3 rounded-3xl border p-4 sm:gap-4 sm:p-6 ${i === 0 ? "bg-ink text-paper" : "bg-card"}`}>
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-signal text-ink"><Award size={18} /></span>
-            <div>
+            <div className="min-w-0 break-words">
               <h3 className="font-semibold leading-snug">{c.name}</h3>
               <p className={`mt-1 font-mono text-xs tracking-widest ${i === 0 ? "text-paper/60" : "text-muted-foreground"}`}>{c.issuer.toUpperCase()}</p>
             </div>
@@ -181,29 +181,29 @@ export function Contact() {
     { icon: MapPin, label: profile.location },
   ];
   return (
-    <section id="contact" className="px-3 pb-6 sm:px-6">
-      <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-deep px-6 py-20 text-paper sm:px-12">
+    <section id="contact" className="px-3 pb-[calc(5rem+env(safe-area-inset-bottom))] sm:px-6 sm:pb-28">
+      <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-deep px-5 py-12 text-paper sm:px-12 sm:py-20">
         <p className="font-mono text-xs tracking-widest text-signal">/06 — CONTACT</p>
-        <Tag className="mt-6 font-display text-3xl font-bold uppercase leading-tight sm:text-5xl lg:text-7xl">
+        <Tag className="mt-6 font-display text-2xl font-bold uppercase leading-tight min-[380px]:text-3xl sm:text-4xl lg:text-7xl">
           Let's secure<br /><span className="text-signal">something.</span>
         </Tag>
-        <div className="mt-10 flex flex-wrap gap-3">
+        <div className="mobile-actions mt-8 grid gap-3 min-[420px]:grid-cols-2 sm:mt-10 sm:flex">
           <Magnetic>
-            <a href={`mailto:${profile.email}`} className="inline-flex min-h-12 items-center gap-2 rounded-full bg-signal px-6 font-medium text-ink">
+            <a href={`mailto:${profile.email}`} className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-signal px-6 font-medium text-ink">
               Get in touch <ArrowUpRight size={18} />
             </a>
           </Magnetic>
           <Magnetic>
-            <a href={profile.cv} download className="inline-flex min-h-12 items-center gap-2 rounded-full border border-paper/30 px-6 font-medium">
+            <a href={profile.cv} download className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-paper/30 px-6 font-medium">
               Download CV <Download size={18} />
             </a>
           </Magnetic>
         </div>
         <ul className="mt-14 grid gap-4 border-t border-paper/15 pt-8 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ icon: Icon, label, href }) => (
-            <li key={label} className="flex items-center gap-3 text-sm text-paper/80">
+            <li key={label} className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-3 text-sm text-paper/80">
               <Icon size={16} className="shrink-0 text-signal" />
-              {href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="break-all hover:text-paper">{label}</a> : label}
+              {href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="flex min-h-11 min-w-0 items-center break-all hover:text-paper">{label}</a> : label}
             </li>
           ))}
         </ul>

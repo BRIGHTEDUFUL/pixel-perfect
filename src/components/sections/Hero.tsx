@@ -8,6 +8,7 @@ import sunset from "@/assets/bright-mascot-sunset.webp";
 import { profile } from "@/data/portfolio";
 import { useTheme } from "@/hooks/useTheme";
 import { Magnetic, Scramble } from "@/components/fx/Effects";
+import { Button } from "@/components/ui/button";
 
 const mascots = { neon, aurora, sunset };
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -55,14 +56,14 @@ export function Hero({ ready }: { ready: boolean }) {
   if (!ready) return <section id="home" className="min-h-svh" />;
 
   return (
-    <section id="home" className="relative overflow-hidden px-4 pb-16 pt-24 sm:px-6 sm:pb-24 lg:pt-32">
+    <section id="home" className="relative overflow-hidden px-4 pb-10 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pb-24 lg:pt-32">
       {/* vertical labels */}
       <div className="absolute left-3 top-1/2 hidden -translate-y-1/2 flex-col items-center gap-8 font-mono text-[10px] tracking-[0.3em] text-muted-foreground 2xl:flex">
         <span className="vertical-label">S/N 48-150BF</span>
         <span className="vertical-label">EVT//PORTFOLIO 2026</span>
       </div>
 
-      <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[1.1fr_1fr]">
+      <div className="mx-auto grid max-w-7xl items-center gap-6 sm:gap-8 lg:grid-cols-[1.1fr_1fr]">
         {/* Copy */}
         <div className="relative z-20 order-1 min-w-0">
           <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
@@ -83,20 +84,24 @@ export function Hero({ ready }: { ready: boolean }) {
             </motion.span>
           </h1>
 
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35, duration: 0.4 }} className="mt-10 max-w-md text-base text-muted-foreground sm:mt-12 sm:text-lg">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35, duration: 0.4 }} className="mt-8 max-w-md text-sm leading-relaxed text-muted-foreground sm:mt-12 sm:text-lg">
             {profile.tagline.join(" • ")}
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }} className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }} className="mobile-actions mt-5 grid gap-2 min-[360px]:grid-cols-2 sm:mt-8 sm:flex sm:gap-3">
             <Magnetic>
-              <Link to="/projects" className="group inline-flex min-h-12 items-center gap-2 rounded-full bg-ink px-6 font-medium text-paper">
+              <Button asChild className="group min-h-11 w-full rounded-full px-3 sm:min-h-12 sm:px-6">
+              <Link to="/projects">
                 View my work <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
+              </Button>
             </Magnetic>
             <Magnetic>
-              <a href={profile.cv} download className="inline-flex min-h-12 items-center gap-2 rounded-full border border-ink/30 px-6 font-medium transition-colors hover:bg-ink hover:text-paper">
+              <Button asChild variant="outline" className="min-h-11 w-full rounded-full border-ink/30 bg-transparent px-3 hover:bg-ink hover:text-paper sm:min-h-12 sm:px-6">
+              <a href={profile.cv} download>
                 <Download size={16} /> Download CV
               </a>
+              </Button>
             </Magnetic>
           </motion.div>
         </div>
