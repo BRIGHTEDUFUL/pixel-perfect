@@ -9,6 +9,7 @@ import {
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { MotionConfig } from "framer-motion";
 import { ThemeProvider } from "@/hooks/useTheme";
 import { Navbar } from "@/components/Navbar";
 import { FloatingThemeSwitcher } from "@/components/ThemeSwitcher";
@@ -124,6 +125,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
+        <MotionConfig reducedMotion="user">
         <div className="grain">
           <SmoothScroll />
           <ScrollProgress />
@@ -132,6 +134,7 @@ function RootComponent() {
           <Outlet />
           <FloatingThemeSwitcher />
         </div>
+        </MotionConfig>
       </ThemeProvider>
     </QueryClientProvider>
   );

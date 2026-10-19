@@ -18,23 +18,23 @@ function Heading({ index, title }: { index: string; title: string }) {
   const standalone = useContext(StandalonePage);
   const Tag = standalone ? "h1" : "h2";
   return (
-    <div className="mb-12 flex items-end justify-between gap-6 border-b pb-6">
-      <Tag className={`min-w-0 font-display font-bold uppercase leading-tight sm:text-5xl lg:text-6xl ${title === "Certifications" ? "text-xl" : "text-3xl"}`}>
+    <div className="mb-8 flex items-end justify-between gap-2 border-b pb-6 sm:mb-12 sm:gap-6">
+      <Tag className={`min-w-0 break-words font-display font-bold uppercase leading-tight sm:text-5xl lg:text-6xl ${title === "Certifications" ? "text-lg" : "text-2xl"}`}>
         <Scramble text={title} />
       </Tag>
-      <span className="font-mono text-xs tracking-widest text-muted-foreground">/{index}</span>
+      <span className="shrink-0 font-mono text-xs tracking-widest text-muted-foreground">/{index}</span>
     </div>
   );
 }
 
-const wrap = "[content-visibility:auto] [contain-intrinsic-size:auto_800px] mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32";
+const wrap = "[content-visibility:auto] [contain-intrinsic-size:auto_800px] mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-32";
 
 export function About() {
   return (
     <section id="about" className={wrap}>
       <Heading index="01" title="About" />
       <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr]">
-        <motion.p {...reveal} className="text-[clamp(1.25rem,2.6vw,1.9rem)] font-medium leading-snug">
+        <motion.p {...reveal} className="text-xl font-medium leading-snug sm:text-2xl lg:text-3xl">
           {about}
         </motion.p>
         <motion.div {...reveal} className="overflow-hidden rounded-3xl bg-deep font-mono text-sm text-paper shadow-float">
@@ -78,11 +78,9 @@ export function Skills() {
         {skillRows.map((row, i) => (
           <div key={i} className="flex overflow-hidden">
             <motion.div
-              className="flex shrink-0 gap-4 pr-4"
-              animate={{ x: i % 2 ? ["-50%", "0%"] : ["0%", "-50%"] }}
-              transition={{ duration: 30 + i * 6, repeat: Infinity, ease: "linear" }}
+              className={`skill-marquee flex shrink-0 gap-4 pr-4 ${i % 2 ? "skill-marquee-reverse" : ""}`}
             >
-              {[...row, ...row, ...row, ...row].map((s, k) => (
+              {[...row, ...row].map((s, k) => (
                 <span key={k} className={`whitespace-nowrap rounded-full border px-6 py-3 font-display text-lg font-bold uppercase sm:text-2xl ${k % 3 === 1 ? "bg-ink text-paper" : k % 3 === 2 ? "bg-signal text-ink border-transparent" : ""}`}>
                   {s}
                 </span>

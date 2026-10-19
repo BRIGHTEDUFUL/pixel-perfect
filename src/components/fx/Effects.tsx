@@ -3,23 +3,27 @@ import { motion, useMotionValue, useScroll, useSpring } from "framer-motion";
 
 export function SmoothScroll() {
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches) return;
+    let disposed = false;
     let raf = 0;
     let lenis: { raf: (t: number) => void; destroy: () => void; scrollTo: (t: Element, o?: object) => void } | null = null;
     let onClick: ((e: MouseEvent) => void) | null = null;
     import("lenis").then(({ default: Lenis }) => {
+      if (disposed) return;
       lenis = new Lenis({ lerp: 0.1 }) as never;
       const loop = (t: number) => { lenis?.raf(t); raf = requestAnimationFrame(loop); };
       raf = requestAnimationFrame(loop);
       onClick = (e) => {
         const a = (e.target as HTMLElement).closest('a[href^="#"]');
         if (!a) return;
-        const el = document.querySelector(a.getAttribute("href")!);
+        const href = a.getAttribute("href");
+        if (!href || href === "#") return;
+        const el = document.getElementById(href.slice(1));
         if (el) { e.preventDefault(); lenis?.scrollTo(el, { offset: -80 }); }
       };
       document.addEventListener("click", onClick);
     });
-    return () => { cancelAnimationFrame(raf); lenis?.destroy(); if (onClick) document.removeEventListener("click", onClick); };
+    return () => { disposed = true; cancelAnimationFrame(raf); lenis?.destroy(); if (onClick) document.removeEventListener("click", onClick); };
   }, []);
   return null;
 }
@@ -76,7 +80,8 @@ export function Magnetic({ children, strength = 0.35 }: { children: ReactNode; s
       style={{ x, y }}
       className="inline-block"
       onMouseMove={(e) => {
-        const r = ref.current!.getBoundingClientRect();
+        if (!ref.current || !window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches) return;
+        const r = ref.current.getBoundingClientRect();
         x.set((e.clientX - r.left - r.width / 2) * strength);
         y.set((e.clientY - r.top - r.height / 2) * strength);
       }}
@@ -93,12 +98,13 @@ export function Scramble({ text, className, delay = 0 }: { text: string; classNa
   const ref = useRef<HTMLSpanElement>(null);
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-    let iv: ReturnType<typeof setInterval>;
+    if (!el || window.matchMedia("(pointer: coarse), (prefers-reduced-motion: reduce)").matches) return;
+    let iv: ReturnType<typeof setInterval> | undefined;
+    let timeout: ReturnType<typeof setTimeout> | undefined;
     const io = new IntersectionObserver(([e]) => {
       if (!e?.isIntersecting) return;
       io.disconnect();
-      setTimeout(() => {
+      timeout = setTimeout(() => {
         let i = 0;
         iv = setInterval(() => {
           setOut(text.split("").map((c, k) => (k < i || c === " " ? c : CHARS[Math.floor(Math.random() * CHARS.length)])).join(""));
@@ -108,7 +114,7 @@ export function Scramble({ text, className, delay = 0 }: { text: string; classNa
       }, delay);
     });
     io.observe(el);
-    return () => { io.disconnect(); clearInterval(iv); };
+    return () => { io.disconnect(); clearInterval(iv); clearTimeout(timeout); };
   }, [text, delay]);
   return <span ref={ref} className={className}>{out}</span>;
 }
