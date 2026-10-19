@@ -154,6 +154,8 @@
 .skill-marquee { animation: skill-scroll 36s linear infinite; }
 .skill-marquee-reverse { animation-direction: reverse; }
 @media (hover: none), (prefers-reduced-motion: reduce) {
+  #home [style] { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; }
+  #home .blur-xl { opacity: 0.25 !important; }
   .skill-marquee, .animate-spin-slow { animation: none; }
   #skills > div.space-y-4 > div { overflow-x: auto; }
   .grain::after { display: none; }
