@@ -12,7 +12,7 @@ export function ContactForm() {
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
-  const [fields, setFields] = useState<Record<string, string>>({});
+  const [fields, setFields] = useState<Partial<Record<"name" | "email" | "subject" | "message" | "website", string>>>({});
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
