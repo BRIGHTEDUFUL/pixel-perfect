@@ -4,5 +4,5 @@
 - [x] Balance mascot head proportions across themes.
 - [x] Improve mobile layout and initial loading without redesigning.
 - [x] Verify mobile pages, theme changes, and performance improvements.
-- [ ] Refine phone spacing, touch navigation, and tablet card layouts without changing the design.
-- [ ] Verify all pages and phone navigation at narrow widths.
+- [x] Refine phone spacing, touch navigation, and tablet card layouts without changing the design.
+- [x] Verify all pages and phone navigation at narrow widths.
