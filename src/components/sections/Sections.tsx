@@ -5,6 +5,9 @@ import { ArrowUpRight, Award, Download, Linkedin, Mail, MapPin, Phone } from "lu
 import { profile } from "@/data/portfolio";
 import { about, certifications, education, experience, organizations, projects, skillRows } from "@/data/content";
 import { Magnetic, Scramble } from "@/components/fx/Effects";
+import { ContactForm } from "@/components/ContactForm";
+import { Button } from "@/components/ui/button";
+import { Link } from "@tanstack/react-router";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const reveal = {
@@ -184,7 +187,9 @@ export function Contact() {
     <section id="contact" className="px-3 pb-[calc(5rem+env(safe-area-inset-bottom))] sm:px-6 sm:pb-28">
       <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-deep px-5 py-12 text-paper sm:px-12 sm:py-20">
         <p className="font-mono text-xs tracking-widest text-signal">/06 — CONTACT</p>
-        <Tag className="mt-6 font-display text-2xl font-bold uppercase leading-tight min-[380px]:text-3xl sm:text-4xl lg:text-7xl">
+        <div className="mt-6 grid gap-10 lg:grid-cols-2 lg:gap-14">
+        <div className="min-w-0">
+        <Tag className="font-display text-2xl font-bold uppercase leading-tight min-[380px]:text-3xl sm:text-4xl lg:text-5xl">
           Let's secure<br /><span className="text-signal">something.</span>
         </Tag>
         <div className="mobile-actions mt-8 grid gap-3 min-[420px]:grid-cols-2 sm:mt-10 sm:flex">
@@ -199,6 +204,9 @@ export function Contact() {
             </a>
           </Magnetic>
         </div>
+        </div>
+        <div className="min-w-0"><ContactForm /></div>
+        </div>
         <ul className="mt-14 grid gap-4 border-t border-paper/15 pt-8 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ icon: Icon, label, href }) => (
             <li key={label} className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-3 text-sm text-paper/80">
@@ -207,7 +215,10 @@ export function Contact() {
             </li>
           ))}
         </ul>
-        <p className="mt-12 font-mono text-[11px] tracking-widest text-paper/40">© {new Date().getFullYear()} {profile.name.toUpperCase()}</p>
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-3">
+          <p className="font-mono text-[11px] tracking-widest text-paper/40">© {new Date().getFullYear()} {profile.name.toUpperCase()}</p>
+          <Button asChild variant="link" className="min-h-11 text-paper/50"><Link to="/admin/messages">Admin</Link></Button>
+        </div>
       </div>
     </section>
   );

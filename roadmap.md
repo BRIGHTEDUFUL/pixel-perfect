@@ -6,3 +6,5 @@
 - [x] Verify mobile pages, theme changes, and performance improvements.
 - [x] Refine phone spacing, touch navigation, and tablet card layouts without changing the design.
 - [x] Verify all pages and phone navigation at narrow widths.
+- [ ] Add a validated contact form connected to a private admin inbox.
+- [ ] Verify inquiry delivery, owner-only access, and mobile layout.
