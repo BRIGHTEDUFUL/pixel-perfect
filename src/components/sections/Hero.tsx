@@ -47,7 +47,7 @@ function SecConsole({ live }: { live: boolean }) {
             key={i}
             initial={live ? { opacity: 0, y: 6 } : false}
             animate={{ opacity: 1, y: 0 }}
-            exit={live ? { opacity: 0, y: -6 } : undefined}
+            exit={{ opacity: 0, y: live ? -6 : 0 }}
             transition={{ duration: 0.35 }}
             className="block truncate"
           >
