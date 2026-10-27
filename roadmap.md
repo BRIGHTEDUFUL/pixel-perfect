@@ -11,3 +11,6 @@
 - [ ] Open the inbox as owner — blocked until Bright signs in once with his verified owner email.
 - [x] Feature SynthxOS co-founder role on the home page and experience page.
 - [x] Verify the SynthxOS feature renders and links correctly on phone and desktop.
+- [x] Add SynthxOS founding date (March 2026) and a security-first note to the venture panel.
+- [x] Add cybersecurity touches: hero security-ops readout, sweep on the hero card, mesh on dark panels.
+- [ ] Verify the new security touches and founding date on phone and desktop.
