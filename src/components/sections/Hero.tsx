@@ -14,6 +14,52 @@ import { Button } from "@/components/ui/button";
 const mascots = { neon, aurora, sunset };
 const ease = [0.22, 1, 0.36, 1] as const;
 
+const SEC_LOG = [
+  "perimeter // nominal",
+  "sweep 10.0.0.0/24 — 0 anomalies",
+  "CVE-2026-0417 patched",
+  "mfa enforced · 0 failed logins",
+  "threat intel sync complete",
+];
+
+function SecConsole({ live }: { live: boolean }) {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    if (!live) return;
+    const id = window.setInterval(() => setI((n) => (n + 1) % SEC_LOG.length), 2600);
+    return () => window.clearInterval(id);
+  }, [live]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.6, duration: 0.5 }}
+      className="mt-6 flex min-w-0 items-center gap-3 overflow-hidden rounded-xl border border-ink/10 bg-card/70 px-3 py-2.5 font-mono text-[10px] uppercase tracking-[0.14em] sm:text-[11px]"
+    >
+      <span className="flex shrink-0 items-center gap-2 text-muted-foreground">
+        <span className="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-signal" />
+        sec-ops
+      </span>
+      <span className="min-w-0 flex-1 border-l border-ink/10 pl-3 text-ink">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={i}
+            initial={live ? { opacity: 0, y: 6 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            exit={live ? { opacity: 0, y: -6 } : undefined}
+            transition={{ duration: 0.35 }}
+            className="block truncate"
+          >
+            {SEC_LOG[i]}
+          </motion.span>
+        </AnimatePresence>
+      </span>
+      <span aria-hidden className="shrink-0 animate-pulse text-signal">▌</span>
+    </motion.div>
+  );
+}
+
 function MaskLine({ children, delay, className }: { children: React.ReactNode; delay: number; className?: string }) {
   return (
     <span className="block overflow-hidden pb-[0.06em]">
@@ -129,6 +175,8 @@ export function Hero({ ready }: { ready: boolean }) {
               </Button>
             </Magnetic>
           </motion.div>
+
+          <SecConsole live={fine} />
         </div>
 
         {/* Visual */}
@@ -144,6 +192,7 @@ export function Hero({ ready }: { ready: boolean }) {
             <div className="absolute left-5 top-6 font-mono text-[10px] tracking-[0.3em] text-paper/80">001 // SEC-OPS</div>
             <div className="absolute bottom-6 left-5 font-display text-5xl font-bold text-paper/20 sm:text-7xl">2026</div>
             <div className="absolute bottom-6 right-5 font-mono text-[10px] tracking-widest text-paper/80">+ ACCRA, GH</div>
+            {fine && <div aria-hidden className="sec-scan absolute inset-0" />}
           </motion.div>
 
           <motion.div style={fine ? { rotateX: rx, rotateY: ry } : {}} className="absolute inset-0 z-10">
