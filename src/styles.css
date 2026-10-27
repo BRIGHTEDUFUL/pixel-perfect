@@ -147,6 +147,22 @@
 @utility animate-spin-slow { animation: spin-slow 18s linear infinite; }
 @utility animate-blob { animation: blob 16s ease-in-out infinite; }
 
+/* Cyber mesh: faint lattice used on dark panels */
+@utility sec-mesh {
+  background-image:
+    repeating-linear-gradient(60deg, transparent 0 22px, color-mix(in oklab, var(--paper) 7%, transparent) 22px 23px),
+    repeating-linear-gradient(-60deg, transparent 0 22px, color-mix(in oklab, var(--paper) 7%, transparent) 22px 23px);
+}
+
+/* Security sweep across the hero card */
+@keyframes sec-scan { from { transform: translateY(-100%); } to { transform: translateY(100%); } }
+@utility sec-scan {
+  background-image: linear-gradient(to bottom, transparent 38%, color-mix(in oklab, var(--paper) 65%, transparent) 50%, transparent 62%);
+  animation: sec-scan 6s linear infinite;
+}
+
+
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }

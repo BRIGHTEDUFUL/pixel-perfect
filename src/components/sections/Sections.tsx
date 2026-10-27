@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import { StandalonePage } from "@/components/PortfolioPage";
-import { ArrowUpRight, Award, Download, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Award, Download, Linkedin, Lock, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { profile } from "@/data/portfolio";
 import { about, certifications, education, experience, organizations, projects, skillRows, venture } from "@/data/content";
 import { Magnetic, Scramble } from "@/components/fx/Effects";
@@ -53,6 +53,8 @@ export function About() {
             <p className="text-paper/70">{education.degree}<br />{education.school}<br />{education.period}</p>
             <p><span className="text-signal">$</span> ls courses/</p>
             <p className="text-paper/70">{education.courses.join("  ·  ")}</p>
+            <p><span className="text-signal">$</span> azure --cert az-900</p>
+            <p className="text-paper/70">[<span className="text-signal">ok</span>] verified · Microsoft Azure Fundamentals</p>
             <p><span className="text-signal">$</span> <span className="animate-pulse">▌</span></p>
           </div>
         </motion.div>
@@ -98,17 +100,22 @@ export function Skills() {
 
 function Venture() {
   return (
-    <motion.article {...reveal} className="mb-10 overflow-hidden rounded-[2rem] bg-deep text-paper shadow-float sm:mb-16">
+    <motion.article {...reveal} className="sec-mesh mb-10 overflow-hidden rounded-[2rem] bg-deep text-paper shadow-float sm:mb-16">
       <div aria-hidden className="h-1 w-full bg-bar-gradient" />
       <div className="grid lg:grid-cols-[1.15fr_1fr]">
         <div className="min-w-0 p-6 sm:p-10">
           <p className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[0.28em]">
             <span className="inline-flex items-center gap-2 rounded-full bg-signal px-3 py-1 font-semibold text-ink">{venture.role}</span>
             <span className="text-paper/50">{profile.location}</span>
+            <span className="text-paper/50">Est. {venture.founded}</span>
           </p>
           <h3 className="mt-5 break-words font-display text-3xl font-bold uppercase leading-none sm:text-5xl">{venture.name}</h3>
           <p className="mt-3 font-script text-2xl font-bold text-theme-3 sm:text-3xl">{venture.tagline}</p>
           <p className="mt-5 max-w-lg text-sm leading-relaxed text-paper/75 sm:text-base">{venture.text}</p>
+          <p className="mt-3 flex max-w-lg items-start gap-2 text-sm leading-relaxed text-paper/60 sm:text-base">
+            <ShieldCheck size={16} className="mt-1 shrink-0 text-signal" />
+            <span>{venture.security}</span>
+          </p>
           <Magnetic>
             <a href={venture.url} target="_blank" rel="noreferrer" className="mt-7 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-signal px-6 font-medium text-ink sm:w-auto">
               Visit {venture.name.toLowerCase()}.com <ArrowUpRight size={18} />
@@ -198,7 +205,7 @@ export function Certifications() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {certifications.map((c, i) => (
           <motion.div {...reveal} transition={{ ...reveal.transition, delay: i * 0.05 }} key={c.name}
-            className={`grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-start gap-3 rounded-3xl border p-4 sm:gap-4 sm:p-6 ${i === 0 ? "bg-ink text-paper" : "bg-card"}`}>
+            className={`grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-start gap-3 rounded-3xl border p-4 sm:gap-4 sm:p-6 ${i === 0 ? "sec-mesh bg-ink text-paper" : "bg-card"}`}>
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-signal text-ink"><Award size={18} /></span>
             <div className="min-w-0 break-words">
               <h3 className="font-semibold leading-snug">{c.name}</h3>
@@ -225,7 +232,7 @@ export function Contact() {
   ];
   return (
     <section id="contact" className="px-3 pb-[calc(5rem+env(safe-area-inset-bottom))] sm:px-6 sm:pb-28">
-      <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-deep px-5 py-12 text-paper sm:px-12 sm:py-20">
+      <div className="sec-mesh mx-auto max-w-7xl rounded-[2.5rem] bg-deep px-5 py-12 text-paper sm:px-12 sm:py-20">
         <p className="font-mono text-xs tracking-widest text-signal">/06 — CONTACT</p>
         <div className="mt-6 grid gap-10 lg:grid-cols-2 lg:gap-14">
         <div className="min-w-0">
@@ -244,6 +251,9 @@ export function Contact() {
             </a>
           </Magnetic>
         </div>
+        <p className="mt-6 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45">
+          <Lock size={12} className="shrink-0 text-signal" /> private inbox · only i can read this
+        </p>
         </div>
         <div className="min-w-0"><ContactForm /></div>
         </div>
