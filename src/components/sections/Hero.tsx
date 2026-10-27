@@ -84,9 +84,20 @@ export function Hero({ ready }: { ready: boolean }) {
             </motion.span>
           </h1>
 
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35, duration: 0.4 }} className="mt-8 max-w-md text-sm leading-relaxed text-muted-foreground sm:mt-12 sm:text-lg">
-            {profile.tagline.join(" • ")}
-          </motion.p>
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.5 }} className="mt-8 max-w-lg sm:mt-12">
+            <p className="text-base leading-snug text-ink sm:text-xl">
+              I hunt threats before they strike, <span className="font-script text-[1.35em] font-bold text-theme-2">close the gaps</span> attackers look for, and lead the response when every second counts.
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-2" aria-label="Focus areas">
+              {profile.tagline.map((t, i) => (
+                <li key={t} className="inline-flex items-center gap-2 rounded-full border border-ink/15 bg-card px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-ink sm:text-[11px]">
+                  <span className="text-muted-foreground">0{i + 1}</span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-signal" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }} className="mobile-actions mt-5 grid gap-2 min-[360px]:grid-cols-2 sm:mt-8 sm:flex sm:gap-3">
             <Magnetic>
