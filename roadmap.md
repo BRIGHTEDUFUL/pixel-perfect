@@ -6,7 +6,8 @@
 - [x] Verify mobile pages, theme changes, and performance improvements.
 - [x] Refine phone spacing, touch navigation, and tablet card layouts without changing the design.
 - [x] Verify all pages and phone navigation at narrow widths.
-- [ ] Add a validated contact form connected to a private admin inbox.
-- [ ] Verify inquiry delivery, owner-only access, and mobile layout.
+- [x] Add a validated contact form connected to a private admin inbox.
+- [x] Verify inquiry delivery, owner-only access, and mobile layout.
+- [ ] Open the inbox as owner — blocked until Bright signs in once with his verified owner email.
 - [x] Feature SynthxOS co-founder role on the home page and experience page.
 - [x] Verify the SynthxOS feature renders and links correctly on phone and desktop.
