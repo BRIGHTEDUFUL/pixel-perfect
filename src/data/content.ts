@@ -35,6 +35,20 @@ export const experience = [
   },
 ];
 
+export const venture = {
+  name: "SynthxOS",
+  role: "Co-Founder",
+  url: "https://www.synthxos.com",
+  tagline: "Innovation in Motion",
+  text: "A B2B software studio in Accra. We find the costly operational problems businesses live with every day, then engineer the focused software that fixes them.",
+  products: [
+    { name: "Notify", for: "freight & shipping operations" },
+    { name: "DriveLink", for: "driving schools" },
+    { name: "Vigil", for: "biometric attendance for workplaces" },
+  ],
+  next: ["Retail", "Healthcare", "Hospitality"],
+};
+
 export const projects = [
   { title: "Vulnerability Scanner", tags: ["Python", "Nmap"], text: "A scanner that discovers hosts, open ports and known weaknesses across a network." },
   { title: "Threat Hunting Lab", tags: ["Splunk", "ELK"], text: "Identifying and analysing potential threats in network telemetry with SIEM tooling." },

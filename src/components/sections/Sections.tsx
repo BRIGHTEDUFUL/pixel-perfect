@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { StandalonePage } from "@/components/PortfolioPage";
 import { ArrowUpRight, Award, Download, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { profile } from "@/data/portfolio";
-import { about, certifications, education, experience, organizations, projects, skillRows } from "@/data/content";
+import { about, certifications, education, experience, organizations, projects, skillRows, venture } from "@/data/content";
 import { Magnetic, Scramble } from "@/components/fx/Effects";
 import { ContactForm } from "@/components/ContactForm";
 import { Button } from "@/components/ui/button";
@@ -96,10 +96,50 @@ export function Skills() {
   );
 }
 
+function Venture() {
+  return (
+    <motion.article {...reveal} className="mb-10 overflow-hidden rounded-[2rem] bg-deep text-paper shadow-float sm:mb-16">
+      <div aria-hidden className="h-1 w-full bg-bar-gradient" />
+      <div className="grid lg:grid-cols-[1.15fr_1fr]">
+        <div className="min-w-0 p-6 sm:p-10">
+          <p className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[0.28em]">
+            <span className="inline-flex items-center gap-2 rounded-full bg-signal px-3 py-1 font-semibold text-ink">{venture.role}</span>
+            <span className="text-paper/50">{profile.location}</span>
+          </p>
+          <h3 className="mt-5 break-words font-display text-3xl font-bold uppercase leading-none sm:text-5xl">{venture.name}</h3>
+          <p className="mt-3 font-script text-2xl font-bold text-theme-3 sm:text-3xl">{venture.tagline}</p>
+          <p className="mt-5 max-w-lg text-sm leading-relaxed text-paper/75 sm:text-base">{venture.text}</p>
+          <Magnetic>
+            <a href={venture.url} target="_blank" rel="noreferrer" className="mt-7 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-signal px-6 font-medium text-ink sm:w-auto">
+              Visit {venture.name.toLowerCase()}.com <ArrowUpRight size={18} />
+            </a>
+          </Magnetic>
+        </div>
+        <div className="min-w-0 border-t border-paper/10 bg-paper/5 p-6 sm:p-10 lg:border-l lg:border-t-0">
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-paper/50">Building now</p>
+          <ul className="mt-4 divide-y divide-paper/10">
+            {venture.products.map((p, i) => (
+              <li key={p.name} className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-baseline gap-3 py-4">
+                <span className="font-mono text-[11px] text-signal">0{i + 1}</span>
+                <div className="min-w-0">
+                  <h4 className="break-words font-display text-lg font-bold uppercase leading-tight sm:text-xl">{p.name}</h4>
+                  <p className="mt-1 text-xs text-paper/60 sm:text-sm">{p.for}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.22em] text-paper/50">Next — {venture.next.join(" · ")}</p>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
 export function Experience() {
   return (
     <section id="experience" className={wrap}>
       <Heading index="02" title="Experience" />
+      <Venture />
       <div className="divide-y border-y">
         {experience.map((e) => (
           <motion.article {...reveal} key={e.org} className="grid gap-4 py-8 md:grid-cols-[200px_1fr_1fr]">

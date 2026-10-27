@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowDownRight, ArrowRight, Download, Shield } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight, Download, Shield } from "lucide-react";
 import neon from "@/assets/bright-mascot-neon.webp";
 import aurora from "@/assets/bright-mascot-aurora.webp";
 import sunset from "@/assets/bright-mascot-sunset.webp";
 import { profile } from "@/data/portfolio";
+import { venture } from "@/data/content";
 import { useTheme } from "@/hooks/useTheme";
 import { Magnetic, Scramble } from "@/components/fx/Effects";
 import { Button } from "@/components/ui/button";
@@ -97,6 +98,19 @@ export function Hero({ ready }: { ready: boolean }) {
                 </li>
               ))}
             </ul>
+            <motion.a
+              href={venture.url}
+              target="_blank"
+              rel="noreferrer"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 bg-card px-4 font-mono text-[10px] uppercase tracking-[0.2em] text-ink transition-colors hover:border-ink/40 sm:text-[11px]"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-theme-2" />
+              {venture.role} of {venture.name}
+              <ArrowUpRight size={14} />
+            </motion.a>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }} className="mobile-actions mt-5 grid gap-2 min-[360px]:grid-cols-2 sm:mt-8 sm:flex sm:gap-3">
