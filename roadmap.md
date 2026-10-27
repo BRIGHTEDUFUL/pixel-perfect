@@ -9,4 +9,4 @@
 - [ ] Add a validated contact form connected to a private admin inbox.
 - [ ] Verify inquiry delivery, owner-only access, and mobile layout.
 - [x] Feature SynthxOS co-founder role on the home page and experience page.
-- [ ] Verify the SynthxOS feature renders and links correctly on phone and desktop.
+- [x] Verify the SynthxOS feature renders and links correctly on phone and desktop.
